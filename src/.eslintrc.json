@@ -1,0 +1,8 @@
+{
+	"rules": {
+		"node/exports-style": [
+			"error",
+			"exports"
+		]
+	}
+}

@@ -1,0 +1,79 @@
+{
+  "name": "feathers-react-init",
+  "version": "0.1.0",
+  "description": "Starting point for Feathers + React projects",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "build": "rimraf dist && webpack",
+    "coverage": "npm run tap & tap --coverage-report=html",
+    "debug": "cross-env DEBUG=* npm start",
+    "dev": "babel-node lib/server/index.dev.js",
+    "lint": "eslint --fix .",
+    "preversion": "npm test",
+    "production": "cross-env NODE_ENV=production npm run build",
+    "start": "npm run production && cross-env NODE_ENV=production node lib/server/index.js",
+    "tap": "tap test -Rspec --cov",
+    "test": "npm run lint && npm run build && cross-env NODE_ENV=production npm run tap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordanbtucker/feathers-react-init.git"
+  },
+  "author": "Jordan Tucker <jordanbtucker@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jordanbtucker/feathers-react-init/issues"
+  },
+  "homepage": "https://github.com/jordanbtucker/feathers-react-init#readme",
+  "dependencies": {
+    "@feathersjs/express": "^1.2.7",
+    "@feathersjs/feathers": "^3.2.3",
+    "@feathersjs/socketio": "^3.2.6",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "debug": "^4.1.0",
+    "dotenv": "^6.1.0",
+    "errorhandler": "^1.5.0",
+    "helmet": "^3.14.0",
+    "morgan": "^1.9.1",
+    "serve-static": "^1.13.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@feathersjs/socketio-client": "^1.1.4",
+    "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.7.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-hot-loader": "^4.3.11",
+    "rimraf": "^2.6.2",
+    "socket.io-client": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "supertest": "^3.3.0",
+    "tap": "^12.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
