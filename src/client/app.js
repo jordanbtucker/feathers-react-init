@@ -26,12 +26,10 @@ export default class App extends React.Component {
 
 	async componentDidMount () {
 		messages.on('created', message => {
-			console.log(message)
+			debug('message: %s', message)
 			this.setState({message})
 		})
-		console.log('creating')
-		await messages.create({message: 'Hi'})
-		// debug('message: %s', message)
-		// this.setState({message})
+
+		await messages.create({})
 	}
 }
