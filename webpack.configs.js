@@ -2,8 +2,6 @@ const path = require('path')
 const {HotModuleReplacementPlugin} = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 
-const appConfig = require('./app-config')
-
 const isProduction = process.env.NODE_ENV === 'production'
 
 const baseConfig = {
@@ -36,13 +34,6 @@ const serverConfig = Object.assign({}, baseConfig, {
 })
 
 const clientConfig = Object.assign({}, baseConfig, {
-	devServer: {
-		hot: true,
-		proxy: {
-			'/api': `http://${appConfig.serverHost}:${appConfig.serverPort}`,
-			'/socket.io': `http://${appConfig.serverHost}:${appConfig.serverPort}`,
-		},
-	},
 	devtool: isProduction ? '' : 'source-map',
 	entry: [
 		isProduction ? './src/client/index.js' : './src/client/index.dev.js',
@@ -50,6 +41,7 @@ const clientConfig = Object.assign({}, baseConfig, {
 	output: {
 		path: path.resolve(__dirname, 'dist/public'),
 		filename: 'client.js',
+		publicPath: '/',
 	},
 	plugins: [
 		new HTMLWebpackPlugin({
@@ -66,7 +58,6 @@ clientConfig.module.rules.push({
 })
 
 if (!isProduction) {
-	clientConfig.entry.push('webpack/hot/dev-server', `webpack-dev-server/client?http://${appConfig.clientHost}:${appConfig.clientPort}/`)
 	clientConfig.plugins.push(new HotModuleReplacementPlugin())
 }
 
