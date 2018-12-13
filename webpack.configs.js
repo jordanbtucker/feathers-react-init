@@ -58,6 +58,7 @@ clientConfig.module.rules.push({
 })
 
 if (!isProduction) {
+	clientConfig.entry.push('webpack-hot-middleware/client')
 	clientConfig.plugins.push(new HotModuleReplacementPlugin())
 }
 
