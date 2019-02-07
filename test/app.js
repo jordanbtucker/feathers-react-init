@@ -1,6 +1,7 @@
 require('dotenv/config')
 const assert = require('assert')
 const supertest = require('supertest')
+const cheerio = require('superagent-cheerio')
 const tap = require('tap')
 
 const app = require('../lib/server/app')
@@ -11,6 +12,19 @@ tap.test('app', async t => {
 			await supertest(app)
 				.get('/')
 				.expect(200, /<title>Feathers, React, and Webpack<\/title>/)
+		})
+	})
+
+	await t.test('GET /api', async t => {
+		await t.test(`responds with list of services and methods`, async t => {
+			const res = await supertest(app)
+				.get('/api')
+				.use(cheerio)
+				.expect(200)
+
+			assert.strictEqual(res.$('h1').text(), 'API')
+			assert.ok(res.$('h2').text().startsWith('api/'))
+			assert.strictEqual(res.$('li').length, 6)
 		})
 	})
 
